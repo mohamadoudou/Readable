@@ -3,8 +3,28 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex: 1;
+  background-color:orange;
+
 }
 .filterContainer{
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color:red;
+  margin-left: 1.5em;
+  flex: 1;
+}
+.categorySpace{
+ margin-left: 2em;
+}
+.navContainer{
+  flex: 1;
+  display: flex;
+  background-image: url('./header.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color:white;
+  height: 10em;
 }

@@ -10,7 +10,7 @@ function Post({ post }) {
     const postDate=post?date:null
     console.log('date problem in post',typeof postDate)
     return (
-        <Card style={{ width: '40rem',height: '15rem', margin: 10 }}>
+        <Card style={{height: '15rem', margin: 10 }}>
             <Card.Body>
                 <Card.Title> {post ? post.title : null}
                     <Badge variant="success" style={{ margin: 5 }}>Edit <AiFillEdit></AiFillEdit></Badge>

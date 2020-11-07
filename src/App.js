@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import { receivePostData } from './actions/post'
 import './App.css'
 import Dashboard from './components/Dashboard'
-
+import Nav from './components/Nav'
 
 
 function App(props) {
@@ -11,7 +11,10 @@ function App(props) {
     props.dispatch(receivePostData())
   })
   return (
+    <>
+    <Nav/>
    <Dashboard/>
+   </>
   )
 }
 
