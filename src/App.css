@@ -28,3 +28,12 @@
   background-color:white;
   height: 10em;
 }
+.postContainer{
+  display: flex;
+  flex:1;
+  height: '15rem';
+   margin: .3em;
+}
+.liDecoration{
+  list-style-type: none;
+}

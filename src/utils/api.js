@@ -1,5 +1,3 @@
-import categories from "../../api-server/categories"
-
 const api='http://localhost:3001'
 
 let token =localStorage.token
@@ -20,5 +18,5 @@ export const getPosts =()=>fetch(`${api}/posts`,headers)
                     .then(data=>data)
 
 export const getCategoryAPI=()=>fetch(`${api}/categories`,headers)
-                                    .then(res=res.json())
+                                    .then(res=>res.json())
                                     .then(categories=>categories)

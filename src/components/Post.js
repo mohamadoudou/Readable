@@ -4,13 +4,14 @@ import { Badge, Card } from 'react-bootstrap'
 import { AiFillEdit } from 'react-icons/ai'
 import { BiDownvote, BiUpvote } from 'react-icons/bi'
 import { MdDeleteForever } from 'react-icons/md'
+import '../App.css'
 
 function Post({ post }) {
-    const date=post?new Date( post.timestamp).toISOString():null
-    const postDate=post?date:null
-    console.log('date problem in post',typeof postDate)
+    // const date=post?new Date( post.timestamp).toISOString():null
+    // const postDate=post?date:null
+    // console.log('date problem in post',typeof postDate)
     return (
-        <Card style={{height: '15rem', margin: 10 }}>
+        <Card className='postContainer' style={{ }}>
             <Card.Body>
                 <Card.Title> {post ? post.title : null}
                     <Badge variant="success" style={{ margin: 5 }}>Edit <AiFillEdit></AiFillEdit></Badge>
@@ -27,7 +28,7 @@ function Post({ post }) {
                      <span style={{marginLeft:5,fontSize:15}}>{post ? post.voteScore : null} Votes</span>
                 </div>
                 <footer className="blockquote-footer"style={{ marginTop: 5 }} >
-                    {post ?postDate: null}
+                    {post ?null: null}
     <p>{post ? post.commentCount : null} Comment</p>
                 </footer>
             </Card.Body>
@@ -36,9 +37,8 @@ function Post({ post }) {
 }
 
 
-function mapStateToProps({ posts }) {
-    const postId = "8xf0y6ziyjabvozdd253nd"
-    const post = posts ? posts[0] : null
+function mapStateToProps({ posts },{postId}) {
+    const post = posts ? posts[postId] : null
     console.log('Post in post ', post)
     return {
         post

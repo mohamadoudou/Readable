@@ -8,8 +8,7 @@ export default function posts(state={},action){
                 ...action.posts
             }
         default:
-            return{
-                state
-            }
+            return state
+            
     }
 }
