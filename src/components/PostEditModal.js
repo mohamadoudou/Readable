@@ -3,7 +3,7 @@ import { Button, Modal, Form } from 'react-bootstrap'
 
 
 
-function EditModal(props) {
+function PostEditModal(props) {
 
     return (
         <Modal
@@ -59,4 +59,4 @@ function EditModal(props) {
 // deleted: false,
 // commentCount: 0
 
-export default EditModal
+export default PostEditModal

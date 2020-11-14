@@ -4,7 +4,7 @@ import { Badge, Card } from 'react-bootstrap'
 import { AiFillEdit } from 'react-icons/ai'
 import { BiDownvote, BiUpvote } from 'react-icons/bi'
 import { MdDeleteForever } from 'react-icons/md'
-import EditModal from './EditModal'
+import PostEditModal from './PostEditModal'
 import '../App.css'
 
 function Post({ post }) {
@@ -40,7 +40,7 @@ function Post({ post }) {
                     </footer>
                 </Card.Body>
             </Card>
-            <EditModal
+            <PostEditModal
             show={modalShow}
             onHide={()=>setModalShow(false)}
             />
