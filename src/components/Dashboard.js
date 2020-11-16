@@ -44,6 +44,7 @@ function Dashboard({ postIds, categories }) {
             <PostEditModal
             show={modalShow}
             onHide={()=>setModalShow(false)}
+            postId={null}
             />
             <ul className='liDecoration'>
                 {postIds.map((postId) => {

@@ -43,6 +43,7 @@ function Post({ post }) {
             <PostEditModal
             show={modalShow}
             onHide={()=>setModalShow(false)}
+            postId={post?post.id:null}
             />
 
         </>
