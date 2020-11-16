@@ -1,25 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { Dropdown, DropdownButton } from 'react-bootstrap'
+import { Dropdown, DropdownButton, Badge } from 'react-bootstrap'
+import { BiCommentAdd } from 'react-icons/bi'
 import Post from './Post'
+import PostEditModal from './PostEditModal'
 import '../App.css'
 
-function Dashboard({ postIds,categories }) {
+function Dashboard({ postIds, categories }) {
+
+    const [modalShow, setModalShow] = useState(false)
+
+
     return (
         <div className='container'>
             <div className='filterContainer'>
                 <DropdownButton id="dropdown-item-button"
                     title={`Caterogy ${postIds[0]}`}>
                     <Dropdown.ItemText>All</Dropdown.ItemText>
-                    {categories && categories.categories? categories.categories.map((category)=>{
-                        return(
-                        <Dropdown.Item key = {category.name}
-                        as="button"
-                        >
-                            {category.name}
-                        </Dropdown.Item>
+                    {categories && categories.categories ? categories.categories.map((category) => {
+                        return (
+                            <Dropdown.Item key={category.name}
+                                as="button"
+                            >
+                                {category.name}
+                            </Dropdown.Item>
                         )
-                    }):null
+                    }) : null
                     }
 
                 </DropdownButton>
@@ -30,6 +36,15 @@ function Dashboard({ postIds,categories }) {
                     <Dropdown.Item as="button">Vote Score</Dropdown.Item>
                 </DropdownButton>
             </div>
+            <button onClick={() => setModalShow(true)}>
+                <Badge variant="success" style={{ margin: 5 }}>
+                    Add a post <BiCommentAdd></BiCommentAdd>
+                </Badge>
+            </button>
+            <PostEditModal
+            show={modalShow}
+            onHide={()=>setModalShow(false)}
+            />
             <ul className='liDecoration'>
                 {postIds.map((postId) => {
                     return (
@@ -45,9 +60,9 @@ function Dashboard({ postIds,categories }) {
 }
 
 
-function mapStateToProps({posts,categories}) {
+function mapStateToProps({ posts, categories }) {
     const postIds = Object.keys(posts)
-    console.log('all categories inside dashboard',categories)
+    console.log('all categories inside dashboard', categories)
     return {
         postIds,
         categories
