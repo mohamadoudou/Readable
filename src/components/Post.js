@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Badge, Card } from 'react-bootstrap'
 import { AiFillEdit } from 'react-icons/ai'
@@ -8,7 +8,7 @@ import PostEditModal from './PostEditModal'
 import '../App.css'
 
 function Post({ post }) {
-    const [modalShow,setModalShow]=useState(false)
+    const [modalShow, setModalShow] = useState(false)
     // const date=post?new Date( post.timestamp).toISOString():null
     // const postDate=post?date:null
     // console.log('date problem in post',typeof postDate)
@@ -17,12 +17,16 @@ function Post({ post }) {
             <Card className='postContainer' style={{}}>
                 <Card.Body>
                     <Card.Title> {post ? post.title : null}
-                        <button onClick={()=>setModalShow(true)}>
+                        <button onClick={() => setModalShow(true)}>
                             <Badge variant="success" style={{ margin: 5 }}>
                                 Edit <AiFillEdit></AiFillEdit>
                             </Badge>
                         </button>
-                        <Badge variant="danger" style={{ margin: 5 }}>Delete <MdDeleteForever></MdDeleteForever></Badge>
+                        <button>
+                            <Badge variant="danger" style={{ margin: 5 }}>
+                                Delete <MdDeleteForever></MdDeleteForever>
+                            </Badge>
+                        </button>
                     </Card.Title>
                     <Card.Subtitle>post by {post ? post.author : null}</Card.Subtitle>
                     <div>
@@ -41,9 +45,9 @@ function Post({ post }) {
                 </Card.Body>
             </Card>
             <PostEditModal
-            show={modalShow}
-            onHide={()=>setModalShow(false)}
-            postId={post?post.id:null}
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                postId={post ? post.id : null}
             />
 
         </>
