@@ -6,12 +6,18 @@ import { BiDownvote, BiUpvote } from 'react-icons/bi'
 import { MdDeleteForever } from 'react-icons/md'
 import PostEditModal from './PostEditModal'
 import '../App.css'
+import { deletePostData } from '../actions/post'
 
-function Post({ post }) {
+function Post({ post,dispatch }) {
     const [modalShow, setModalShow] = useState(false)
+    const [isAddPost,setIsAddPost]=useState(true)
     // const date=post?new Date( post.timestamp).toISOString():null
     // const postDate=post?date:null
     // console.log('date problem in post',typeof postDate)
+    const handleDelete=()=>{
+        dispatch(deletePostData(post.id))
+        console.log('handle delete called',post.id)
+    }
     return (
         <>
             <Card className='postContainer' style={{}}>
@@ -22,7 +28,7 @@ function Post({ post }) {
                                 Edit <AiFillEdit></AiFillEdit>
                             </Badge>
                         </button>
-                        <button>
+                        <button onClick={handleDelete}>
                             <Badge variant="danger" style={{ margin: 5 }}>
                                 Delete <MdDeleteForever></MdDeleteForever>
                             </Badge>
@@ -48,6 +54,7 @@ function Post({ post }) {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 postId={post ? post.id : null}
+                isAddPost={isAddPost}
             />
 
         </>

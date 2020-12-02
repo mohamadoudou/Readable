@@ -63,7 +63,7 @@ function Dashboard({ postIds, categories }) {
 
 function mapStateToProps({ posts, categories }) {
     const postIds = Object.keys(posts)
-    console.log('all categories inside dashboard', categories)
+    console.log('all posts inside dashboard', posts)
     return {
         postIds,
         categories
