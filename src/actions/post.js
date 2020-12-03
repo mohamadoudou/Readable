@@ -19,10 +19,11 @@ function addPost(post){
     }
 }
 
-function deletePost(postId){
+function deletePost(post,index){
     return{
         type:DELETE_POST,
-        postId
+        post,
+        index
     }
 }
 
@@ -45,11 +46,11 @@ export function addPostData(title,body,author,category){
     }
 }
 
-export function deletePostData(postId){
+export function deletePostData(postId,index){
     return (dispatch)=>{
         deletePostAPI(postId)
         .then((post)=>{
-            dispatch(deletePost(post.id))
+            dispatch(deletePost(post,index))
         })
     }
 }

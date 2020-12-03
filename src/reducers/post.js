@@ -1,4 +1,4 @@
-import {ADD_POST, RECEIVE_POSTS} from '../actions/post'
+import {ADD_POST, DELETE_POST, RECEIVE_POSTS} from '../actions/post'
 
 
 export default function posts(state={},action){
@@ -13,6 +13,15 @@ export default function posts(state={},action){
                 ...state,
                 [index]:{
                     ...action.post
+                }
+            }
+        case DELETE_POST:
+            console.log('inside delete post reducer')
+            return{
+                ...state,
+                [action.index]:{
+                    ...action.post,
+                    deleted:true,                
                 }
             }
         default:

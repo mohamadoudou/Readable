@@ -8,19 +8,19 @@ import PostEditModal from './PostEditModal'
 import '../App.css'
 import { deletePostData } from '../actions/post'
 
-function Post({ post,dispatch }) {
+function Post({ post,dispatch,index }) {
     const [modalShow, setModalShow] = useState(false)
     const [isAddPost,setIsAddPost]=useState(true)
     // const date=post?new Date( post.timestamp).toISOString():null
     // const postDate=post?date:null
     // console.log('date problem in post',typeof postDate)
     const handleDelete=()=>{
-        dispatch(deletePostData(post.id))
+        dispatch(deletePostData(post.id,index))
         console.log('handle delete called',post.id)
     }
     return (
         <>
-            <Card className='postContainer' style={{}}>
+            {post&&post.deleted!==true?(<Card className='postContainer' style={{}}>
                 <Card.Body>
                     <Card.Title> {post ? post.title : null}
                         <button onClick={() => setModalShow(true)}>
@@ -36,7 +36,7 @@ function Post({ post,dispatch }) {
                     </Card.Title>
                     <Card.Subtitle>post by {post ? post.author : null}</Card.Subtitle>
                     <div>
-                        <Badge variant='primary'>Redux</Badge>
+                        <Badge variant='primary'>{post?post.category:null}</Badge>
                     </div>
                     {post ? post.body : null}
                     <div style={{ marginTop: 10 }}>
@@ -49,7 +49,8 @@ function Post({ post,dispatch }) {
                         <p>{post ? post.commentCount : null} Comment</p>
                     </footer>
                 </Card.Body>
-            </Card>
+            </Card>):null
+            }
             <PostEditModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
@@ -66,6 +67,7 @@ function mapStateToProps({ posts }, { postId }) {
     const post = posts ? posts[postId] : null
     console.log('Post in post ', post)
     return {
+        index:postId,
         post
     }
 }
