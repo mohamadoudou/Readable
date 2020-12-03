@@ -18,6 +18,7 @@ const headers={
 export const getPosts =()=>fetch(`${api}/posts`,headers)
                     .then(res=>res.json())
                     .then(data=>data)
+                    .catch(err=>{console.log(err)})
 
 export const getCategoryAPI=()=>fetch(`${api}/categories`,headers)
                                     .then(res=>res.json())
