@@ -1,4 +1,4 @@
-import {ADD_POST, DELETE_POST, EDIT_POST, RECEIVE_POSTS} from '../actions/post'
+import {ADD_POST, CATEGORY_POSTS, DELETE_POST, EDIT_POST, RECEIVE_POSTS} from '../actions/post'
 
 
 export default function posts(state={},action){
@@ -31,6 +31,11 @@ export default function posts(state={},action){
                     deleted:true,                
                 }
             }
+        case CATEGORY_POSTS:{
+            return{
+                ...action.posts
+            }
+        }
         default:
             return state
             

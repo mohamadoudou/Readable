@@ -80,7 +80,7 @@ function Post({ post, dispatch, index }) {
         )
     }
     else{
-        return
+        return null
     }
 }
 

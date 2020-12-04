@@ -69,3 +69,8 @@ export const votingAPI=(option,post)=>fetch(`${api}/posts/${post.id}`,
  }
 ).then(res=>res.json())
 .then(post=>post)
+
+export const getPostCategoryAPI =(category)=>fetch(`${api}/${category}/posts`,headers)
+                    .then(res=>res.json())
+                    .then(data=>data)
+                    .catch(err=>{console.log(err)})

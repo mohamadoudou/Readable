@@ -2,13 +2,15 @@ import {getPosts,
         addNewPostAPI, 
         deletePostAPI, 
         editPostAPI,
-        votingAPI} from '../utils/api'
+        votingAPI,
+        getPostCategoryAPI} from '../utils/api'
 import {postFormat} from '../utils/helpers'
 export const RECEIVE_POSTS='RECEIVE_POSTS'
 export const ADD_POST = 'ADD_POST'
 export const DELETE_POST='DELETE_POST'
 export const EDIT_POST='EDIT_POST'
 export const VOTE_POST='VOTE_POST'
+export const CATEGORY_POSTS='CATEGORY_POSTS'
 
 
 function receivePost(posts){
@@ -52,6 +54,13 @@ function deletePost(post,index){
     }
 }
 
+function categoryPosts(posts){
+    return{
+        type:CATEGORY_POSTS,
+        posts
+    }
+}
+
 
 export function receivePostData(){
     return (dispatch)=>{
@@ -90,6 +99,15 @@ export function deletePostData(postId,index){
     return (dispatch)=>{
         deletePostAPI(postId)
         .then((post)=>{ dispatch(deletePost(post,index))
+        })
+    }
+}
+
+export function categoryPostsData(category){
+    return (dispatch)=>{
+        getPostCategoryAPI(category)
+        .then((posts)=>{
+            dispatch(categoryPosts(posts))
         })
     }
 }
