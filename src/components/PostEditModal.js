@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { Button, Modal, Form } from 'react-bootstrap'
 import {connect} from 'react-redux'
-import { addPostData } from '../actions/post'
+import { addPostData, editPostData } from '../actions/post'
 
 
 
 function PostEditModal(props) {
+    const {post,index,dispatch}=props
     const [values, setValues] = useState({
         title: '',
         body: '',
@@ -22,8 +23,15 @@ function PostEditModal(props) {
     const handleSubmit=(e)=>{
         e.preventDefault()
         const {title,body,author,category}=values
-        props.dispatch(addPostData(title,body,author,category))
-        //console.log('handle submit working',values)
+        if(post){
+            // to do set new value
+            console.log('post to be updated',post)
+            dispatch(editPostData(post,index))
+        }
+        else{
+            dispatch(addPostData(title,body,author,category))
+        }
+  
         setValues({
             title: '',
             body: '',
@@ -32,6 +40,16 @@ function PostEditModal(props) {
         })
         props.onHide()
     }
+
+    // if (post&&post.title){
+    //     const {title,body,author,category}=post
+    //     setValues({
+    //         title: title,
+    //         body: body,
+    //         author:author,
+    //         category:category,
+    //     })
+    // }
 
     return (
         <Modal
@@ -42,7 +60,7 @@ function PostEditModal(props) {
             {JSON.stringify(values)}
             <Modal.Header closeButton>
                 <Modal.Title id='contained-modal-title-vcenter'>
-                    {props.isAddPost ? 'Edit Post' : 'Add Post '}
+                    {post&&post.id ? 'Edit Post' : 'Add Post '}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -106,15 +124,5 @@ function PostEditModal(props) {
         </Modal>
     )
 }
-
-// id: post.id,
-// timestamp: post.timestamp,
-// title: post.title,
-// body: post.body,
-// author: post.author,
-// category: post.category,
-// voteScore: 1,
-// deleted: false,
-// commentCount: 0
 
 export default connect()(PostEditModal)

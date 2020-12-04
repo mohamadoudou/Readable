@@ -6,11 +6,12 @@ import { BiDownvote, BiUpvote } from 'react-icons/bi'
 import { MdDeleteForever } from 'react-icons/md'
 import PostEditModal from './PostEditModal'
 import '../App.css'
-import { deletePostData } from '../actions/post'
+import { deletePostData, votePostData } from '../actions/post'
 
 function Post({ post, dispatch, index }) {
     const [modalShow, setModalShow] = useState(false)
     const [isEditPost, setIsEditPost] = useState(true)
+    const [option,setOption]=useState('upVote')
     // const date=post?new Date( post.timestamp).toISOString():null
     // const postDate=post?date:null
     // console.log('date problem in post',typeof postDate)
@@ -18,7 +19,16 @@ function Post({ post, dispatch, index }) {
         dispatch(deletePostData(post.id, index))
         console.log('handle delete called', post.id)
     }
-
+    
+    const handleUpVote=()=>{
+        console.log('upVote clicked')
+        setOption('upVote')
+        dispatch(votePostData(index,{option:'upVote'},post))
+    }
+    const handleDownVote=()=>{
+        console.log('downVote clicked')
+        dispatch(votePostData(index,{option:'downVote'},post))
+    }
 
     if (post && post.deleted !== true) {
         return (
@@ -44,13 +54,13 @@ function Post({ post, dispatch, index }) {
                         {post ? post.body : null}
                         <div style={{ marginTop: 10 }}>
                             <a>
-                                <BiUpvote style={{ color: 'green',marginBottom:-10 }} className='voteButton'></BiUpvote>
+                                <BiUpvote style={{ color: 'green',marginBottom:-10 }} onClick={handleUpVote}></BiUpvote>
                             </a>
                             <div>{post ? post.voteScore : null} 
                                 <span style={{ marginLeft: 5, fontSize: 15 }}>Votes</span>
                             </div>
                             <a>
-                                <BiDownvote style={{ color: 'red',marginTop:-15  }} className='voteButton' ></BiDownvote>
+                                <BiDownvote style={{ color: 'red',marginTop:-15  }} onClick={handleDownVote}></BiDownvote>
                             </a>
                         </div>
                         <footer className="blockquote-footer" style={{ marginTop: 5 }} >
