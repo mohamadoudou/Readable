@@ -35,6 +35,31 @@ export const addNewPostAPI=(post)=>fetch(`${api}/posts`,
 ).then(res=>res.json())
  .then(post=>post)
 
+
+ export const editPostAPI=(post)=>fetch(`${api}/posts/${post.id}`,  
+ {  method:'PUT',
+     headers:{
+     'Authorization':token,
+     'Content-Type': 'application/json'
+     },
+     body:JSON.stringify(post)
+ }
+).then(res=>res.json())
+.then(post=>post)
+
+
+export const votingAPI=(option,post)=>fetch(`${api}/posts/${post.id}`,  
+ {  method:'POST',
+     headers:{
+     'Authorization':token,
+     'Content-Type': 'application/json'
+     },
+     body:JSON.stringify(option),
+ }
+).then(res=>res.json())
+.then(post=>post)
+
+
  export const deletePostAPI=(postId)=>fetch(`${api}/posts/${postId}`,  
  {  method:'DELETE',
      headers:{
