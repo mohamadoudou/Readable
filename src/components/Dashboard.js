@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Dropdown, DropdownButton, Badge,ButtonGroup } from 'react-bootstrap'
 import { BiCommentAdd } from 'react-icons/bi'
@@ -7,11 +7,15 @@ import PostEditModal from './PostEditModal'
 import '../App.css'
 import { categoryPostsData, receivePostData } from '../actions/post'
 
-function Dashboard({ postIds, categories,dispatch }) {
+function Dashboard({ posts, categories,dispatch }) {
 
     const [modalShow, setModalShow] = useState(false)
     const [category,setCategory]=useState('all')
-
+    const [postIds,setPostIds]=useState([])
+    
+    useEffect(()=>{
+        setPostIds(Object.keys(posts))
+    },[posts])
 
     const handleCategory=(e)=>{
         if(e==='all'){
@@ -20,6 +24,22 @@ function Dashboard({ postIds, categories,dispatch }) {
         }else{
             setCategory(e)
             dispatch(categoryPostsData(e))
+        }
+    }
+
+    const handleSort=(e)=>{
+        if(e==='date'){
+            setPostIds(Object.keys(posts)
+              .sort((a,b)=>posts[b].timestamp-posts[a].timestamp)
+            )
+        }
+        else if(e==='votescore'){
+            setPostIds(Object.keys(posts)
+            .sort((a,b)=>posts[b].voteScore-posts[a].voteScore)
+            )
+        }
+        else{
+            setPostIds(Object.keys(posts))
         }
     }
 
@@ -47,11 +67,14 @@ function Dashboard({ postIds, categories,dispatch }) {
                     }
 
                 </DropdownButton>
-                <DropdownButton id="dropdown-item-button"
+                <DropdownButton 
+                    id="dropdown-item-button"
                     className='categorySpace'
-                    title={`Sort by ${postIds[0]}`}>
-                    <Dropdown.Item as="button">Date</Dropdown.Item>
-                    <Dropdown.Item as="button">Vote Score</Dropdown.Item>
+                    title={`Sort by ${postIds[0]}`}
+                    onSelect={handleSort}
+                    >
+                    <Dropdown.Item as="button" eventKey='date'>Date</Dropdown.Item>
+                    <Dropdown.Item as="button" eventKey='votescore'>Vote Score</Dropdown.Item>
                 </DropdownButton>
             </div>
             <button onClick={() => setModalShow(true)}>
@@ -79,11 +102,14 @@ function Dashboard({ postIds, categories,dispatch }) {
 
 
 function mapStateToProps({ posts, categories }) {
-    const postIds = Object.keys(posts)
+    const postIds=Object.keys(posts)
+      .sort((a,b)=>posts[b].timestamp - posts[a].timestamp)
+   // const postIds = Object.keys(posts)
     console.log('all posts inside dashboard', posts)
     return {
         postIds,
-        categories
+        categories,
+        posts
     }
 }
 
