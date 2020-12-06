@@ -48,7 +48,7 @@ function Dashboard({ posts, categories,dispatch }) {
             <div className='filterContainer'>
                 <DropdownButton id="dropdown-item-button"
                      as={ButtonGroup}
-                     id="dropdown-menu-align-right"
+                     //id="dropdown-menu-align-right"
                     title={`Caterogy ${category}`}
                      onSelect={handleCategory}
                     >
