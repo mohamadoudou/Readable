@@ -74,3 +74,11 @@ export const getPostCategoryAPI =(category)=>fetch(`${api}/${category}/posts`,he
                     .then(res=>res.json())
                     .then(data=>data)
                     .catch(err=>{console.log(err)})
+
+
+
+
+export const getCommentsAPI=(postId)=>fetch(`${api}/posts/${postId}/comments`,headers)
+                                .then(res=>res.json())
+                                .then(comments=>comments)
+                                .catch(err=>{console.log(err)})
