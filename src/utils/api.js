@@ -82,3 +82,53 @@ export const getCommentsAPI=(postId)=>fetch(`${api}/posts/${postId}/comments`,he
                                 .then(res=>res.json())
                                 .then(comments=>comments)
                                 .catch(err=>{console.log(err)})
+
+
+
+export const addNewCommentAPI=(comment)=>fetch(`${api}/comments`,{
+    method:'POST',
+    headers:{
+        'Authorization':token,
+        'Content-Type': 'application/json'
+    },
+    body:JSON.stringify(comment)
+}).then(res=>res.json())
+  .then(comment=>comment)
+  .catch(err=>{console.log(err)})
+
+
+export const deleteCommentAPI=(commentId)=>fetch(`${api}/comments/${commentId}`,{
+    method:'DELETE',
+    headers:{
+        'Authorization':token,
+        'Content-Type': 'application/json'
+    },  
+}).then(res=>res.json())
+  .then(comment=>comment)
+  .catch(err=>{console.log(err)})
+
+
+
+export const voteCommentAPI=(option,commentId)=>fetch(`${api}/comments/${commentId}`,{
+    method:'POST',
+    headers:{
+        'Authorization':token,
+        'Content-Type': 'application/json'
+    }, 
+    body:JSON.stringify(option) 
+}).then(res=>res.json())
+  .then(comment=>comment)
+  .catch(err=>{console.log(err)})
+
+
+
+export const editCommentAPI=(comment,commentId)=>fetch(`${api}/comments/${commentId}`,{
+    method:'PUT',
+    headers:{
+        'Authorization':token,
+        'Content-Type': 'application/json'
+    }, 
+    body:JSON.stringify(comment) 
+}).then(res=>res.json())
+  .then(comment=>comment)
+  .catch(err=>{console.log(err)})
