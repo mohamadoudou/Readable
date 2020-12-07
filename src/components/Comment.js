@@ -5,20 +5,42 @@ import { BiDownvote, BiUpvote } from 'react-icons/bi'
 import { AiFillEdit } from 'react-icons/ai'
 import { MdDeleteForever } from 'react-icons/md'
 import '../comment.css'
+import { addCommentData, deleteCommentData } from '../actions/comment'
 
 
 
-function Comment({ comments,commentIds }) {
+function Comment({author,parentId, comments,commentIds,dispatch }) {
+
+    const [body,setBody]=useState('')
+
+    const handleChange=(e)=>{
+        e.persist()
+        setBody(e.target.value)
+    }
+
+    const handleSubmit=(e)=>{
+        e.preventDefault()
+        dispatch(addCommentData(body,author,parentId))
+        console.log('final value of body in submit',body)
+        setBody('')
+    }
+
+    const handleDelete=(index,commentId)=>{
+        dispatch(deleteCommentData(index,commentId))
+        console.log(commentId,index)
+    }
 
     return (
         <Card>
             <Card.Title>Comments</Card.Title>
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 <InputGroup className="mb-3">
                     <FormControl
                         placeholder="Add your comment"
                         aria-label="Add your comment"
                         aria-describedby="basic-addon2"
+                        value={body}
+                        onChange={handleChange}
                     />
                     <InputGroup.Append>
                         <Button variant="outline-secondary" type='submit'>Add</Button>
@@ -26,7 +48,7 @@ function Comment({ comments,commentIds }) {
                 </InputGroup>
             </Form>
             {comments?commentIds.map((commentId) => {
-                return (
+               if(comments[commentId].deleted!==true){return (
                     <Card.Body key={comments[commentId].id}>
                         <Card.Subtitle>
                             Comment By {comments[commentId].author}
@@ -34,7 +56,7 @@ function Comment({ comments,commentIds }) {
                                 <button><AiFillEdit /></button>
                             </span>
                             <span>
-                                <button><MdDeleteForever /></button>
+                                <button onClick={()=>handleDelete(commentId,comments[commentId].id)}><MdDeleteForever /></button>
                             </span>
                         </Card.Subtitle>
                         <div className='comment__display'>
@@ -57,6 +79,7 @@ function Comment({ comments,commentIds }) {
                         </div>
                     </Card.Body>
                 )
+               }else{return null}
             }):<></>
             }
         </Card>
@@ -64,10 +87,12 @@ function Comment({ comments,commentIds }) {
 }
 
 
-function mapStateToProps({ comments }) {
+function mapStateToProps({ comments },{parentId,author}) {
     const commentIds=Object.keys(comments)
     console.log('comments in comment',comments)
     return {
+        author,
+        parentId,
         commentIds,
         comments
     }
