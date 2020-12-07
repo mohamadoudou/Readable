@@ -1,4 +1,5 @@
-import { ADD_COMMENT, DELETE_COMMENT, GET_COMMENTS } from "../actions/comment";
+import { ADD_COMMENT, DELETE_COMMENT, GET_COMMENTS, VOTE_COMMENT } from "../actions/comment";
+import { VOTE_POST } from "../actions/post";
 
 export default function comments (state={},action){
 
@@ -15,6 +16,13 @@ export default function comments (state={},action){
                     ...action.comment
                 }
                 
+            }
+        case VOTE_COMMENT:
+            return{
+                ...state,
+                [action.index]:{
+                    ...action.comment
+                }
             }
         case DELETE_COMMENT:
             return{

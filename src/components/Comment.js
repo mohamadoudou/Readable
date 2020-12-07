@@ -5,7 +5,7 @@ import { BiDownvote, BiUpvote } from 'react-icons/bi'
 import { AiFillEdit } from 'react-icons/ai'
 import { MdDeleteForever } from 'react-icons/md'
 import '../comment.css'
-import { addCommentData, deleteCommentData } from '../actions/comment'
+import { addCommentData,voteCommentData ,deleteCommentData } from '../actions/comment'
 
 
 
@@ -23,6 +23,15 @@ function Comment({author,parentId, comments,commentIds,dispatch }) {
         dispatch(addCommentData(body,author,parentId))
         console.log('final value of body in submit',body)
         setBody('')
+    }
+
+    const handleUpVote=(index,commentId)=>{
+        //commentId here is the comment unique id 
+        dispatch(voteCommentData(index,{option:'upVote'},commentId))
+    }
+    const handleDownVote=(index,commentId)=>{
+        //commentId here is the comment unique id 
+        dispatch(voteCommentData(index,{option:'downVote'},commentId))
     }
 
     const handleDelete=(index,commentId)=>{
@@ -48,6 +57,7 @@ function Comment({author,parentId, comments,commentIds,dispatch }) {
                 </InputGroup>
             </Form>
             {comments?commentIds.map((commentId) => {
+                //commentId here is the index
                if(comments[commentId].deleted!==true){return (
                     <Card.Body key={comments[commentId].id}>
                         <Card.Subtitle>
@@ -62,13 +72,19 @@ function Comment({author,parentId, comments,commentIds,dispatch }) {
                         <div className='comment__display'>
                             <div>
                                 <a>
-                                    <BiUpvote style={{ color: 'green', marginBottom: -10 }} ></BiUpvote>
+                                    <BiUpvote 
+                                    style={{ color: 'green', marginBottom: -10 }}
+                                    onClick={()=>{handleUpVote(commentId,comments[commentId].id)}} 
+                                     />
                                 </a>
                                 <div>{comments[commentId].voteScore}
                                     <span style={{ marginLeft: 5, fontSize: 15 }}>Votes</span>
                                 </div>
                                 <a>
-                                    <BiDownvote style={{ color: 'red', marginTop: -15 }}></BiDownvote>
+                                    <BiDownvote 
+                                    style={{ color: 'red', marginTop: -15 }}
+                                    onClick={()=>{handleDownVote(commentId,comments[commentId].id)}}
+                                    />
                                 </a>
                             </div>
                             <div className='comment__text'>

@@ -73,7 +73,10 @@ function PostDetail({ post,dispatch,index }) {
                         <p>{post ? post.commentCount : null} Comment</p>
                     </footer>
                 </Card.Body>
-                <Comment />
+                <Comment 
+                author={post?post.author:null}
+                parentId={post?post.id:null}
+                />
             </Card>
            
 

@@ -23,3 +23,18 @@ export const postFormat=(title,body,author,category)=>{
         category
     }
 }
+
+
+export const commentFormat=(body,author,parentId)=>{
+
+  const id=uuidv4()
+  const timestamp=Date.now()
+
+  return{
+    id,
+    timestamp,
+    body,
+    author,
+    parentId
+  }
+}

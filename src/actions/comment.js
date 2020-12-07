@@ -1,9 +1,10 @@
-import { addNewCommentAPI, deleteCommentAPI, getCommentsAPI } from "../utils/api"
+import { addNewCommentAPI, deleteCommentAPI, getCommentsAPI, voteCommentAPI } from "../utils/api"
 import { commentFormat } from "../utils/helpers"
 
 export const GET_COMMENTS='GET_COMMENTS'
 export const ADD_COMMENT='ADD_COMMENT'
 export const DELETE_COMMENT='DELETE_COMMENT'
+export const VOTE_COMMENT='VOTE_COMMENT'
 
 function receiveComments(comments){
     return{
@@ -15,6 +16,14 @@ function receiveComments(comments){
 function addComment(comment){
     return{
         type:ADD_COMMENT,
+        comment
+    }
+}
+
+function voteComment(index,comment){
+    return{
+        type:VOTE_COMMENT,
+        index,
         comment
     }
 }
@@ -39,6 +48,13 @@ export function addCommentData(body,author,parentId){
     return (dispatch)=>{
         addNewCommentAPI(commentFormat(body,author,parentId))
         .then((comment)=>{dispatch(addComment(comment))})
+    }
+}
+
+export function voteCommentData(index,option,commentId){
+    return(dispatch)=>{
+        voteCommentAPI(option,commentId)
+        .then((comment)=>{dispatch(voteComment(index,comment))})
     }
 }
 

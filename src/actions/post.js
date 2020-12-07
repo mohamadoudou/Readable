@@ -5,6 +5,7 @@ import {getPosts,
         votingAPI,
         getPostCategoryAPI} from '../utils/api'
 import {postFormat} from '../utils/helpers'
+
 export const RECEIVE_POSTS='RECEIVE_POSTS'
 export const ADD_POST = 'ADD_POST'
 export const DELETE_POST='DELETE_POST'
@@ -35,11 +36,10 @@ function editPost(post,index){
     }
 }
 
-function votePost(index,option,post){
+function votePost(index,post){
     return{
-        type:EDIT_POST,
+        type:VOTE_POST,
         index,
-        option,
         post
     }
 }
@@ -90,7 +90,7 @@ export function votePostData(index,option,post){
     return (dispatch)=>{
         votingAPI(option,post)
         .then((post)=>{
-            dispatch(votePost(index,option,post))
+            dispatch(votePost(index,post))
         })
     }
 }
