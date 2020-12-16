@@ -16,8 +16,8 @@ function App(props) {
   return (
     <>
     <Nav/>
-   {/* <Dashboard/> */}
-    <PostDetail />
+   <Dashboard/>
+    {/* <PostDetail /> */}
    </>
   )
 }

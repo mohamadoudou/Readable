@@ -8,10 +8,10 @@ import { addPostData, editPostData } from '../actions/post'
 function PostEditModal(props) {
     const {post,index,dispatch}=props
     const [values, setValues] = useState({
-        title: '',
-        body: '',
-        author: '',
-        category: 'react',
+        title: post?post.title:'',
+        body: post?post.body:'',
+        author: post?post.author:'',
+        category: post?post.category:'react',
     })
 
     const handleInputChange = (e) => {
@@ -24,11 +24,11 @@ function PostEditModal(props) {
         e.preventDefault()
         const {title,body,author,category}=values
         if(post){
-            // to do set new value
-            console.log('post to be updated',post)
-            dispatch(editPostData(post,index))
+            console.log('post to be updated',{...post,body})
+            dispatch(editPostData({...post,body},index))
         }
         else{
+            console.log('new post to be add')
             dispatch(addPostData(title,body,author,category))
         }
   
@@ -40,16 +40,6 @@ function PostEditModal(props) {
         })
         props.onHide()
     }
-
-    // if (post&&post.title){
-    //     const {title,body,author,category}=post
-    //     setValues({
-    //         title: title,
-    //         body: body,
-    //         author:author,
-    //         category:category,
-    //     })
-    // }
 
     return (
         <Modal
@@ -74,6 +64,7 @@ function PostEditModal(props) {
                             placeholder='Title'
                             onChange={handleInputChange}
                             required
+                            disabled={post}
                         />
                     </Form.Group>
                     <Form.Group controlId='exampleForm.ControlTextarea1'>
@@ -96,6 +87,7 @@ function PostEditModal(props) {
                             placeholder='post By'
                             onChange={handleInputChange}
                             required
+                            disabled={post}
                         />
                     </Form.Group>
                     <Form.Group controlId='exampleForm.ControlSelect1'>
@@ -106,6 +98,7 @@ function PostEditModal(props) {
                             as='select'
                             onChange={handleInputChange}
                             required
+                            disabled={post}
                             >
                             <option>react</option>
                             <option>redux</option>
