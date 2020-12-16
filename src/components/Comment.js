@@ -1,17 +1,15 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Card, InputGroup, Button, FormControl, Form } from 'react-bootstrap'
-import { BiDownvote, BiUpvote } from 'react-icons/bi'
-import { AiFillEdit } from 'react-icons/ai'
-import { MdDeleteForever } from 'react-icons/md'
 import '../comment.css'
 import { addCommentData,voteCommentData ,deleteCommentData } from '../actions/comment'
-
+import CommentDetail from './CommentDetail'
 
 
 function Comment({author,parentId, comments,commentIds,dispatch }) {
 
     const [body,setBody]=useState('')
+    
 
     const handleChange=(e)=>{
         e.persist()
@@ -24,21 +22,6 @@ function Comment({author,parentId, comments,commentIds,dispatch }) {
         console.log('final value of body in submit',body)
         setBody('')
     }
-
-    const handleUpVote=(index,commentId)=>{
-        //commentId here is the comment unique id 
-        dispatch(voteCommentData(index,{option:'upVote'},commentId))
-    }
-    const handleDownVote=(index,commentId)=>{
-        //commentId here is the comment unique id 
-        dispatch(voteCommentData(index,{option:'downVote'},commentId))
-    }
-
-    const handleDelete=(index,commentId)=>{
-        dispatch(deleteCommentData(index,commentId))
-        console.log(commentId,index)
-    }
-
     return (
         <Card>
             <Card.Title>Comments</Card.Title>
@@ -52,49 +35,21 @@ function Comment({author,parentId, comments,commentIds,dispatch }) {
                         onChange={handleChange}
                     />
                     <InputGroup.Append>
-                        <Button variant="outline-secondary" type='submit'>Add</Button>
+                        <Button 
+                        variant="outline-secondary" 
+                        type='submit'
+                        disabled={body===''}
+                        >Add</Button>
                     </InputGroup.Append>
                 </InputGroup>
             </Form>
             {comments?commentIds.map((commentId) => {
                 //commentId here is the index
-               if(comments[commentId].deleted!==true){return (
-                    <Card.Body key={comments[commentId].id}>
-                        <Card.Subtitle>
-                            Comment By {comments[commentId].author}
-                            <span>
-                                <button><AiFillEdit /></button>
-                            </span>
-                            <span>
-                                <button onClick={()=>handleDelete(commentId,comments[commentId].id)}><MdDeleteForever /></button>
-                            </span>
-                        </Card.Subtitle>
-                        <div className='comment__display'>
-                            <div>
-                                <a>
-                                    <BiUpvote 
-                                    style={{ color: 'green', marginBottom: -10 }}
-                                    onClick={()=>{handleUpVote(commentId,comments[commentId].id)}} 
-                                     />
-                                </a>
-                                <div>{comments[commentId].voteScore}
-                                    <span style={{ marginLeft: 5, fontSize: 15 }}>Votes</span>
-                                </div>
-                                <a>
-                                    <BiDownvote 
-                                    style={{ color: 'red', marginTop: -15 }}
-                                    onClick={()=>{handleDownVote(commentId,comments[commentId].id)}}
-                                    />
-                                </a>
-                            </div>
-                            <div className='comment__text'>
-                                <p>
-                                    {comments[commentId].body}
-                                </p>
-                            </div>
-                        </div>
-                    </Card.Body>
-                )
+               if(comments[commentId].deleted!==true){
+                  return( <CommentDetail 
+                   index={commentId}
+                   comment={comments[commentId]}/>
+                  )
                }else{return null}
             }):<></>
             }

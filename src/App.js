@@ -1,5 +1,6 @@
 import React,{useEffect} from 'react'
 import {connect} from 'react-redux'
+import {BrowserRouter,Route,Switch} from 'react-router-dom'
 import { getCategoryData } from './actions/category'
 import { receivePostData } from './actions/post'
 import './App.css'
@@ -15,10 +16,16 @@ function App(props) {
   },[])
   return (
     <>
-    <Nav/>
-   <Dashboard/>
-    {/* <PostDetail /> */}
-   </>
+      <Nav/>
+      <Switch>
+        <Route exact path='/'>
+          <Dashboard/>
+        </Route> 
+        <Route path='/detail'>
+          <PostDetail />
+        </Route>
+      </Switch>
+    </>
   )
 }
 

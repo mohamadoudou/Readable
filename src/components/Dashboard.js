@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+import {Link} from 'react-router-dom'
 import { Dropdown, DropdownButton, Badge,ButtonGroup } from 'react-bootstrap'
 import { BiCommentAdd } from 'react-icons/bi'
 import Post from './Post'
@@ -91,7 +92,9 @@ function Dashboard({ posts, categories,dispatch }) {
                 {postIds.map((postId) => {
                     return (
                         <li key={postId} >
-                            <Post postId={postId} />
+                            <Link to='detail'>
+                                <Post postId={postId} />
+                            </Link>
                         </li>
                     )
                 })}
