@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Badge, Card } from 'react-bootstrap'
 import { AiFillEdit } from 'react-icons/ai'
@@ -32,7 +33,7 @@ function Post({ post, dispatch, index }) {
 
     if (post && post.deleted !== true) {
         return (
-            <>
+            <> 
                 <Card className='postContainer' style={{}}>
                     <Card.Body>
                         <Card.Title> {post ? post.title : null}
@@ -51,7 +52,9 @@ function Post({ post, dispatch, index }) {
                         <div>
                             <Badge variant='primary'>{post ? post.category : null}</Badge>
                         </div>
+                        <Link to={`/${post.category}/${post.id}`} className='link'>
                         {post ? post.body : null}
+                        </Link>
                         <div style={{ marginTop: 10 }}>
                             <a>
                                 <BiUpvote style={{ color: 'green',marginBottom:-10 }} onClick={handleUpVote}></BiUpvote>

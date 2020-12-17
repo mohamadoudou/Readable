@@ -1,48 +1,44 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link,useParams} from 'react-router-dom'
 import { Dropdown, DropdownButton, Badge,ButtonGroup } from 'react-bootstrap'
 import { BiCommentAdd } from 'react-icons/bi'
 import Post from './Post'
 import PostEditModal from './PostEditModal'
 import '../App.css'
 import { categoryPostsData, receivePostData } from '../actions/post'
+import Category from './Category'
 
 function Dashboard({ posts, categories,dispatch }) {
 
     const [modalShow, setModalShow] = useState(false)
-    const [category,setCategory]=useState('all')
+    const {category}=useParams()
     const [postIds,setPostIds]=useState([])
     
-    useEffect(()=>{
-        setPostIds(Object.keys(posts))
-    },[posts])
-
     const handleCategory=(e)=>{
+        console.log('useparams',category)
         if(e==='all'){
-            setCategory(e)
-            dispatch(receivePostData())
+           // dispatch(receivePostData())
         }else{
-            setCategory(e)
-            dispatch(categoryPostsData(e))
+//dispatch(categoryPostsData(e))
         }
     }
 
-    const handleSort=(e)=>{
-        if(e==='date'){
-            setPostIds(Object.keys(posts)
-              .sort((a,b)=>posts[b].timestamp-posts[a].timestamp)
-            )
-        }
-        else if(e==='votescore'){
-            setPostIds(Object.keys(posts)
-            .sort((a,b)=>posts[b].voteScore-posts[a].voteScore)
-            )
-        }
-        else{
-            setPostIds(Object.keys(posts))
-        }
-    }
+    // const handleSort=(e)=>{
+    //     if(e==='date'){
+    //         setPostIds(Object.keys(posts)
+    //           .sort((a,b)=>posts[b].timestamp-posts[a].timestamp)
+    //         )
+    //     }
+    //     else if(e==='votescore'){
+    //         setPostIds(Object.keys(posts)
+    //         .sort((a,b)=>posts[b].voteScore-posts[a].voteScore)
+    //         )
+    //     }
+    //     else{
+    //         setPostIds(Object.keys(posts))
+    //     }
+    // }
 
     return (
         <div className='container'>
@@ -50,19 +46,27 @@ function Dashboard({ posts, categories,dispatch }) {
                 <DropdownButton id="dropdown-item-button"
                      as={ButtonGroup}
                      //id="dropdown-menu-align-right"
-                    title={`Caterogy ${category}`}
+                    title={`Caterogy ${category?category:'all'}`}
                      onSelect={handleCategory}
                     >
-                    <Dropdown.Item  eventKey='all' > All </Dropdown.Item>
+                    <Dropdown.Item  eventKey='all' > 
+                        <Link to='/' className='link'>
+                        All 
+                        </Link>
+                    </Dropdown.Item>
                     {categories && categories.categories ? categories.categories.map((category) => {
                         return (
+                            <Link to={`/${category.name}`} className='link' key={category.name}>
                             <Dropdown.Item 
-                                key={category.name}
+                                
                                 as="button"
                                 eventKey={category.name}
                             >
-                                {category.name}
+                                
+                                    {category.name}
+                               
                             </Dropdown.Item>
+                            </Link>
                         )
                     }) : null
                     }
@@ -72,7 +76,7 @@ function Dashboard({ posts, categories,dispatch }) {
                     id="dropdown-item-button"
                     className='categorySpace'
                     title={`Sort by ${postIds[0]}`}
-                    onSelect={handleSort}
+                    // onSelect={handleSort}
                     >
                     <Dropdown.Item as="button" eventKey='date'>Date</Dropdown.Item>
                     <Dropdown.Item as="button" eventKey='votescore'>Vote Score</Dropdown.Item>
@@ -88,29 +92,17 @@ function Dashboard({ posts, categories,dispatch }) {
             onHide={()=>setModalShow(false)}
             postId={null}
             />
-            <ul className='liDecoration'>
-                {postIds.map((postId) => {
-                    return (
-                        <li key={postId} >
-                            <Link to='detail'>
-                                <Post postId={postId} />
-                            </Link>
-                        </li>
-                    )
-                })}
-            </ul>
+            <Category
+            category={category}
+            />
         </div>
     )
 }
 
 
 function mapStateToProps({ posts, categories }) {
-    const postIds=Object.keys(posts)
-      .sort((a,b)=>posts[b].timestamp - posts[a].timestamp)
-   // const postIds = Object.keys(posts)
     console.log('all posts inside dashboard', posts)
     return {
-        postIds,
         categories,
         posts
     }
