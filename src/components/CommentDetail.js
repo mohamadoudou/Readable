@@ -25,7 +25,7 @@ function CommentDetail({index,comment,dispatch}){
         dispatch(editCommentData(index,{...comment,body},comment.id))
         setToggleEditComment(false)
     }
-    
+
     const handleUpVote=(index,commentId)=>{
         dispatch(voteCommentData(index,{option:'upVote'},commentId))
     }

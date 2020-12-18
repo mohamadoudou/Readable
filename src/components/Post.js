@@ -35,7 +35,9 @@ function Post({ post, dispatch, index }) {
         return (
             <> 
                 <Card className='postContainer' style={{}}>
+
                     <Card.Body>
+
                         <Card.Title> {post ? post.title : null}
                             <button onClick={() => setModalShow(true)}>
                                 <Badge variant="success" style={{ margin: 5 }}>
@@ -48,13 +50,17 @@ function Post({ post, dispatch, index }) {
                                 </Badge>
                             </button>
                         </Card.Title>
+
                         <Card.Subtitle>post by {post ? post.author : null}</Card.Subtitle>
+                        
                         <div>
                             <Badge variant='primary'>{post ? post.category : null}</Badge>
                         </div>
+                        
                         <Link to={`/${post.category}/${post.id}`} className='link'>
                         {post ? post.body : null}
                         </Link>
+                        
                         <div style={{ marginTop: 10 }}>
                             <a>
                                 <BiUpvote style={{ color: 'green',marginBottom:-10 }} onClick={handleUpVote}></BiUpvote>
@@ -66,12 +72,16 @@ function Post({ post, dispatch, index }) {
                                 <BiDownvote style={{ color: 'red',marginTop:-15  }} onClick={handleDownVote}></BiDownvote>
                             </a>
                         </div>
+                       
                         <footer className="blockquote-footer" style={{ marginTop: 5 }} >
                             {post ? null : null}
                             <p>{post ? post.commentCount : null} Comment</p>
                         </footer>
+                   
                     </Card.Body>
+                
                 </Card>
+                
                 <PostEditModal
                     show={modalShow}
                     onHide={() => setModalShow(false)}

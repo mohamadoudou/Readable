@@ -1,4 +1,5 @@
 import React,{useEffect, useState} from 'react'
+import { useParams,withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Badge, Card } from 'react-bootstrap'
 import { AiFillEdit } from 'react-icons/ai'
@@ -7,17 +8,22 @@ import { MdDeleteForever } from 'react-icons/md'
 import { deletePostData, votePostData } from '../actions/post'
 import PostEditModal from './PostEditModal'
 import Comment from './Comment'
+import NotFound from './NotFound'
 import { receiveCommentsData } from '../actions/comment'
+import {postDetailData} from '../actions/postDetail'
+
 
 function PostDetail({ post,dispatch,index }) {
   
     const [modalShow, setModalShow] = useState(false)
     const [isEditPost, setIsEditPost] = useState(true)
     const [option,setOption]=useState('upVote')
+    const {postId} =useParams()
 
     useEffect(()=>{
-        if(post){dispatch(receiveCommentsData(post.id))}
-    },[post])
+        dispatch(postDetailData(postId))
+        if(post){dispatch(receiveCommentsData(postId))}
+    },[])
 
     const handleDelete = () => {
         dispatch(deletePostData(post.id, index))
@@ -35,9 +41,9 @@ function PostDetail({ post,dispatch,index }) {
     }
 
 
-    if (post && post.deleted !== true) {
+    if (post && post.id && post.deleted !== true) {
         return (
-        <>
+        <>  {console.log('post id in post detail from use params',postId)}
             <Card className='postContainer' style={{}}>
                 <Card.Body>
                     <Card.Title> {post ? post.title : null}
@@ -90,17 +96,17 @@ function PostDetail({ post,dispatch,index }) {
         </>
     )
     }else{
-    return null
+    return <NotFound/>
     }
 }
 
 
-function mapStateToProps({ posts }) {
-    console.log('post in post Detail',posts[0])
+function mapStateToProps({ postDetail,posts },props) {
+    console.log('post in post Detail',postDetail)
     return {
-        post: posts[0],
+        post: postDetail,
         index:0
     }
 }
 
-export default connect(mapStateToProps)(PostDetail)
+export default withRouter(connect(mapStateToProps)(PostDetail))

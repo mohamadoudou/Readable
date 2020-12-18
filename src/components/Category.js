@@ -31,7 +31,7 @@ function Category({dispatch,category,postIds}){
 function mapStateToProps({posts}) {
     const postIds=Object.keys(posts)
       .sort((a,b)=>posts[b].timestamp - posts[a].timestamp)
-    console.log('all posts inside dashboard', posts)
+    console.log('all posts inside category', posts)
     return {
         postIds,
     }

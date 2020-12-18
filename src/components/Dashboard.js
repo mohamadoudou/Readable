@@ -15,14 +15,6 @@ function Dashboard({ posts, categories,dispatch }) {
     const {category}=useParams()
     const [postIds,setPostIds]=useState([])
     
-    const handleCategory=(e)=>{
-        console.log('useparams',category)
-        if(e==='all'){
-           // dispatch(receivePostData())
-        }else{
-//dispatch(categoryPostsData(e))
-        }
-    }
 
     // const handleSort=(e)=>{
     //     if(e==='date'){
@@ -47,7 +39,6 @@ function Dashboard({ posts, categories,dispatch }) {
                      as={ButtonGroup}
                      //id="dropdown-menu-align-right"
                     title={`Caterogy ${category?category:'all'}`}
-                     onSelect={handleCategory}
                     >
                     <Dropdown.Item  eventKey='all' > 
                         <Link to='/' className='link'>
@@ -101,7 +92,6 @@ function Dashboard({ posts, categories,dispatch }) {
 
 
 function mapStateToProps({ posts, categories }) {
-    console.log('all posts inside dashboard', posts)
     return {
         categories,
         posts

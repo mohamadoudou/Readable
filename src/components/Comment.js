@@ -47,10 +47,11 @@ function Comment({author,parentId, comments,commentIds,dispatch }) {
                 //commentId here is the index
                if(comments[commentId].deleted!==true){
                   return( <CommentDetail 
+                   key={commentId}
                    index={commentId}
                    comment={comments[commentId]}/>
                   )
-               }else{return null}
+               }
             }):<></>
             }
         </Card>
