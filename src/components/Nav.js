@@ -6,7 +6,6 @@ function Nav(){
     return(
         <div className='navContainer'>
             <h1>Readable</h1>    
-            <p>hello</p>
         </div>
     )
 }

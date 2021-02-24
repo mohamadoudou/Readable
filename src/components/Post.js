@@ -77,8 +77,10 @@ function Post({ post, dispatch, index }) {
 
                         <footer className="blockquote-footer" style={{ marginTop: 5 }} >
                             {post ? null : null}
-                            <p>{post ? post.commentCount : null} Comment</p>
-                        </footer>
+                            <Link to={`/${post.category}/${post.id}`} className='link'>
+                            <p>{post ? post.commentCount : null} Comments</p>
+                            </Link>
+                        </footer>   
 
                     </Card.Body>
 
