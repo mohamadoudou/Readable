@@ -68,8 +68,9 @@ a :hover{
   text-decoration: none;
   color: inherit;
 }
-Link :hover{
-  
+.link:hover{
+  text-decoration: none;
+  color: inherit;
 }
 @media screen and (max-width:700px){
   h1{
