@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Badge, Card } from 'react-bootstrap'
 import { AiFillEdit } from 'react-icons/ai'
@@ -12,7 +12,7 @@ import { deletePostData, votePostData } from '../actions/post'
 function Post({ post, dispatch, index }) {
     const [modalShow, setModalShow] = useState(false)
     const [isEditPost, setIsEditPost] = useState(true)
-    const [option,setOption]=useState('upVote')
+    const [option, setOption] = useState('upVote')
     // const date=post?new Date( post.timestamp).toISOString():null
     // const postDate=post?date:null
     // console.log('date problem in post',typeof postDate)
@@ -20,68 +20,70 @@ function Post({ post, dispatch, index }) {
         dispatch(deletePostData(post.id, index))
         console.log('handle delete called', post.id)
     }
-    
-    const handleUpVote=()=>{
+
+    const handleUpVote = () => {
         console.log('upVote clicked')
         setOption('upVote')
-        dispatch(votePostData(index,{option:'upVote'},post))
+        dispatch(votePostData(index, { option: 'upVote' }, post))
     }
-    const handleDownVote=()=>{
+    const handleDownVote = () => {
         console.log('downVote clicked')
-        dispatch(votePostData(index,{option:'downVote'},post))
+        dispatch(votePostData(index, { option: 'downVote' }, post))
     }
 
     if (post && post.deleted !== true) {
         return (
-            <> 
+            <>
                 <Card className='postContainer' style={{}}>
 
                     <Card.Body>
 
                         <Card.Title> {post ? post.title : null}
-                            <button onClick={() => setModalShow(true)}>
-                                <Badge variant="success" style={{ margin: 5 }}>
-                                    Edit <AiFillEdit></AiFillEdit>
-                                </Badge>
-                            </button>
-                            <button onClick={handleDelete}>
-                                <Badge variant="danger" style={{ margin: 5 }}>
-                                    Delete <MdDeleteForever></MdDeleteForever>
-                                </Badge>
-                            </button>
+                            <div>
+                                <button onClick={() => setModalShow(true)}>
+                                    <Badge variant="success" style={{ margin: 5 }}>
+                                        Edit <AiFillEdit></AiFillEdit>
+                                    </Badge>
+                                </button>
+                                <button onClick={handleDelete}>
+                                    <Badge variant="danger" style={{ margin: 5 }}>
+                                        Delete <MdDeleteForever></MdDeleteForever>
+                                    </Badge>
+                                </button>
+                            </div>
                         </Card.Title>
 
                         <Card.Subtitle>post by {post ? post.author : null}</Card.Subtitle>
-                        
+
                         <div>
                             <Badge variant='primary'>{post ? post.category : null}</Badge>
                         </div>
-                        
+
                         <Link to={`/${post.category}/${post.id}`} className='link'>
-                        {post ? post.body : null}
+                            {post ? post.body : null}
                         </Link>
-                        
+
                         <div style={{ marginTop: 10 }}>
                             <a>
-                                <BiUpvote style={{ color: 'green',marginBottom:-10 }} onClick={handleUpVote}></BiUpvote>
+                                <BiUpvote style={{ color: 'green', marginBottom: -10 }} onClick={handleUpVote}></BiUpvote>
                             </a>
-                            <div>{post ? post.voteScore : null} 
+                            <div>{post ? post.voteScore : null}
                                 <span style={{ marginLeft: 5, fontSize: 15 }}>Votes</span>
                             </div>
                             <a>
-                                <BiDownvote style={{ color: 'red',marginTop:-15  }} onClick={handleDownVote}></BiDownvote>
+                                <BiDownvote style={{ color: 'red', marginTop: -15 }} onClick={handleDownVote}></BiDownvote>
                             </a>
                         </div>
-                       
+
                         <footer className="blockquote-footer" style={{ marginTop: 5 }} >
                             {post ? null : null}
                             <p>{post ? post.commentCount : null} Comment</p>
                         </footer>
-                   
+
                     </Card.Body>
-                
+
                 </Card>
-                
+
                 <PostEditModal
                     show={modalShow}
                     onHide={() => setModalShow(false)}
@@ -92,7 +94,7 @@ function Post({ post, dispatch, index }) {
             </>
         )
     }
-    else{
+    else {
         return null
     }
 }

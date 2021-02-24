@@ -28,9 +28,15 @@ function Category({dispatch,category,postIds}){
 }
 
 
-function mapStateToProps({posts}) {
-    const postIds=Object.keys(posts)
+function mapStateToProps({posts},{sort}) {
+    let postIds=[]
+    if(sort==='vote score'){
+        postIds=(Object.keys(posts)
+        .sort((a,b)=>posts[b].voteScore-posts[a].voteScore))
+    }else{
+       postIds=Object.keys(posts)
       .sort((a,b)=>posts[b].timestamp - posts[a].timestamp)
+    }
     console.log('all posts inside category', posts)
     return {
         postIds,

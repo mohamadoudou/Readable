@@ -14,6 +14,7 @@ function Dashboard({ posts, categories,dispatch }) {
     const [modalShow, setModalShow] = useState(false)
     const {category}=useParams()
     const [postIds,setPostIds]=useState([])
+    const [sort,setSort]=useState('date')
     
 
     // const handleSort=(e)=>{
@@ -66,15 +67,22 @@ function Dashboard({ posts, categories,dispatch }) {
                 <DropdownButton 
                     id="dropdown-item-button"
                     className='categorySpace'
-                    title={`Sort by ${postIds[0]}`}
-                    // onSelect={handleSort}
+                    title={`Sort by ${sort}`}
+                    onSelect={(e)=>setSort(e)}
                     >
-                    <Dropdown.Item as="button" eventKey='date'>Date</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='votescore'>Vote Score</Dropdown.Item>
+                    <Dropdown.Item as="button" eventKey='date'>date</Dropdown.Item>
+                    <Dropdown.Item as="button" eventKey='vote score'>vote score</Dropdown.Item>
                 </DropdownButton>
             </div>
-            <button onClick={() => setModalShow(true)}>
-                <Badge variant="success" style={{ margin: 5 }}>
+            <button onClick={() => setModalShow(true)} className='addPost'>
+                <Badge 
+                variant="success" 
+                style={{
+                     margin: 5,
+                     width:130,
+                     height:35,
+                     fontSize:15,
+                      }}>
                     Add a post <BiCommentAdd></BiCommentAdd>
                 </Badge>
             </button>
@@ -85,6 +93,7 @@ function Dashboard({ posts, categories,dispatch }) {
             />
             <Category
             category={category}
+            sort={sort}
             />
         </div>
     )

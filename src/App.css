@@ -4,17 +4,18 @@
   justify-content: center;
   align-items: center;
   flex: 1;
-  background-color:orange;
-
+  background: linear-gradient(90deg, rgb(77, 122, 221) 0%, rgb(66, 113, 207) 0%, rgb(199, 209, 228) 100%);
+  margin-top: 5rem;
 }
 .filterContainer{
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color:red;
   margin-left: 1.5em;
+  padding: .2rem 0rem 1rem 0rem;
   flex: 1;
+
 }
 .categorySpace{
  margin-left: 2em;
@@ -22,11 +23,26 @@
 .navContainer{
   flex: 1;
   display: flex;
-  background-image: url('./header.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color:white;
-  height: 10em;
+  justify-self: center;
+  background-color:rgb(38, 100, 233);
+  background: linear-gradient(90deg, rgb(55, 108, 224) 0%, rgb(37, 91, 199) 0%, rgb(199, 209, 228) 100%);
+  height: 7em;
+
+}
+
+h1{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 10rem;
+  margin:0em 0em 0em 7em;
+  color:whitesmoke;
+  padding-top: 20px;
+}
+.addPost{
+  height: 3rem;
+  width: 10rem;
+  border: none;
+  border-radius: 5px;
+  margin-left: 2rem;
 }
 .postContainer{
   display: flex;
@@ -49,4 +65,12 @@ a :hover{
 }
 Link :hover{
   
+}
+@media screen and (max-width:700px){
+  h1{
+    font-size: 10px;
+    margin:0em 0em 0em 3em;
+    color:whitesmoke;
+    padding-top: 20px;
+  }
 }
