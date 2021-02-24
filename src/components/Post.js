@@ -65,13 +65,13 @@ function Post({ post, dispatch, index }) {
 
                         <div style={{ marginTop: 10 }}>
                             <a>
-                                <BiUpvote style={{ color: 'green', marginBottom: -10 }} onClick={handleUpVote}></BiUpvote>
+                                <BiUpvote style={{ color: 'green', marginBottom: -10, fontSize:23 }} onClick={handleUpVote}></BiUpvote>
                             </a>
                             <div>{post ? post.voteScore : null}
                                 <span style={{ marginLeft: 5, fontSize: 15 }}>Votes</span>
                             </div>
                             <a>
-                                <BiDownvote style={{ color: 'red', marginTop: -15 }} onClick={handleDownVote}></BiDownvote>
+                                <BiDownvote style={{ color: 'red', marginTop: -15, fontSize:23 }} onClick={handleDownVote}></BiDownvote>
                             </a>
                         </div>
 
