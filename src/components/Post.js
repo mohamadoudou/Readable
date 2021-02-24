@@ -40,12 +40,12 @@ function Post({ post, dispatch, index }) {
 
                         <Card.Title> {post ? post.title : null}
                             <div>
-                                <button onClick={() => setModalShow(true)}>
+                                <button onClick={() => setModalShow(true)} className='button'>
                                     <Badge variant="success" style={{ margin: 5 }}>
                                         Edit <AiFillEdit></AiFillEdit>
                                     </Badge>
                                 </button>
-                                <button onClick={handleDelete}>
+                                <button onClick={handleDelete} className='button'>
                                     <Badge variant="danger" style={{ margin: 5 }}>
                                         Delete <MdDeleteForever></MdDeleteForever>
                                     </Badge>

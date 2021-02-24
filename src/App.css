@@ -50,6 +50,11 @@ h1{
   height: '15rem';
    margin: .3em;
 }
+.button{
+  border: none;
+  border-radius: 5px;
+  margin: .2rem;
+}
 .liDecoration{
   list-style-type: none;
 }
