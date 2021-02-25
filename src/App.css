@@ -63,7 +63,7 @@ a :hover{
   color: inherit;
 }
 .postCommentContainer{
-  width: 90%;
+  width: 80%;
 }
 .link:hover{
   text-decoration: none;
@@ -75,5 +75,8 @@ a :hover{
     margin:0em 0em 0em 3em;
     color:whitesmoke;
     padding-top: 20px;
+  }
+  .postCommentContainer{
+    width: 90%;
   }
 }
