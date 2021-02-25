@@ -25,7 +25,7 @@ function Comment({author,parentId, comments,commentIds,dispatch }) {
     return (
         <Card className='commentContainer'>
             <Card.Title style={{margin:6}}> Comments</Card.Title>
-            <Form onSubmit={handleSubmit} style={{margin:6}}>
+            <Form onSubmit={handleSubmit} className='commentAddForm'>
                 <InputGroup className="mb-3">
                     <FormControl
                         placeholder="Add your comment"

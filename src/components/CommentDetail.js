@@ -44,10 +44,10 @@ function CommentDetail({index,comment,dispatch}){
                 <Card.Subtitle>
                     Comment By {comment.author}
                     <span>
-                        <button  onClick={()=>setToggleEditComment(true)}><AiFillEdit /></button>
+                        <button  onClick={()=>setToggleEditComment(true)} className='button'><AiFillEdit /></button>
                     </span>
                     <span>
-                        <button onClick={()=>handleDelete(index,comment.id)}><MdDeleteForever /></button>
+                        <button onClick={()=>handleDelete(index,comment.id)} className='button'><MdDeleteForever /></button>
                     </span>
                 </Card.Subtitle>
                 <div className='comment__display'>
@@ -71,7 +71,7 @@ function CommentDetail({index,comment,dispatch}){
                     <div className={toggleEditComment?'':'comment__text'}>
                         <p>
                             {toggleEditComment?(
-                                <Form onSubmit={handleEditSubmit}>
+                                <Form onSubmit={handleEditSubmit} className='commentEditForm'>
                                 <InputGroup className="mb-3">
                                     <FormControl
                                         placeholder="Edit your comment"

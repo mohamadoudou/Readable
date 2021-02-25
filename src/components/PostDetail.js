@@ -49,12 +49,12 @@ function PostDetail({ post, dispatch, index }) {
                     <Card.Body>
                         <Card.Title> {post ? post.title : null}
                             <div>
-                                <button onClick={() => setModalShow(true)}>
+                                <button onClick={() => setModalShow(true)} className='button'>
                                     <Badge variant="success" style={{ margin: 5 }}>
                                         Edit <AiFillEdit></AiFillEdit>
                                     </Badge>
                                 </button>
-                                <button onClick={handleDelete}>
+                                <button onClick={handleDelete} className='button'>
                                     <Badge variant="danger" style={{ margin: 5 }}>
                                         Delete <MdDeleteForever></MdDeleteForever>
                                     </Badge>
@@ -68,13 +68,13 @@ function PostDetail({ post, dispatch, index }) {
                         {post ? post.body : null}
                         <div style={{ marginTop: 10 }}>
                             <a>
-                                <BiUpvote style={{ color: 'green', marginBottom: -10 }} onClick={handleUpVote}></BiUpvote>
+                                <BiUpvote style={{ color: 'green', marginBottom: -10, fontSize:23}} onClick={handleUpVote}></BiUpvote>
                             </a>
                             <div>{post ? post.voteScore : null}
                                 <span style={{ marginLeft: 5, fontSize: 15 }}>Votes</span>
                             </div>
                             <a>
-                                <BiDownvote style={{ color: 'red', marginTop: -15 }} onClick={handleDownVote}></BiDownvote>
+                                <BiDownvote style={{ color: 'red', marginTop: -15, fontSize:23 }} onClick={handleDownVote}></BiDownvote>
                             </a>
                         </div>
                         <footer className="blockquote-footer" style={{ marginTop: 5 }} >

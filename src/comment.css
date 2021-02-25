@@ -13,3 +13,9 @@
 .comment__text p{
     margin:0.5rem;
 }
+.commentAddForm{
+    padding: 1rem;
+}
+.commentEditForm{
+    padding: 1rem;
+}
