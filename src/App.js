@@ -12,7 +12,7 @@ function App(props) {
 
   useEffect(()=>{
     props.dispatch(getCategoryData())
-  },[])
+  })
   
   return (
     <>

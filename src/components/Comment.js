@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Card, InputGroup, Button, FormControl, Form } from 'react-bootstrap'
 import '../comment.css'
-import { addCommentData,voteCommentData ,deleteCommentData } from '../actions/comment'
+import { addCommentData } from '../actions/comment'
 import CommentDetail from './CommentDetail'
 
 
@@ -19,7 +19,6 @@ function Comment({author,parentId, comments,commentIds,dispatch }) {
     const handleSubmit=(e)=>{
         e.preventDefault()
         dispatch(addCommentData(body,author,parentId))
-        console.log('final value of body in submit',body)
         setBody('')
     }
     return (
@@ -52,6 +51,9 @@ function Comment({author,parentId, comments,commentIds,dispatch }) {
                    comment={comments[commentId]}/>
                   )
                }
+               else{
+                   return null
+               }
             }):<></>
             }
         </Card>
@@ -61,7 +63,6 @@ function Comment({author,parentId, comments,commentIds,dispatch }) {
 
 function mapStateToProps({ comments },{parentId,author}) {
     const commentIds=Object.keys(comments)
-    console.log('comments in comment',comments)
     return {
         author,
         parentId,

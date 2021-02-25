@@ -30,7 +30,6 @@ export default function posts(state={},action){
                 }
             }
         case DELETE_POST:
-            console.log('inside delete post reducer')
             return{
                 ...state,
                 [action.index]:{

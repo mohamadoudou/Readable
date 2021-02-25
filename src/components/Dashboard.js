@@ -1,44 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import {Link,useParams} from 'react-router-dom'
 import { Dropdown, DropdownButton, Badge,ButtonGroup } from 'react-bootstrap'
 import { BiCommentAdd } from 'react-icons/bi'
-import Post from './Post'
 import PostEditModal from './PostEditModal'
 import '../App.css'
-import { categoryPostsData, receivePostData } from '../actions/post'
 import Category from './Category'
 
-function Dashboard({ posts, categories,dispatch }) {
+function Dashboard({categories}) {
 
     const [modalShow, setModalShow] = useState(false)
     const {category}=useParams()
-    const [postIds,setPostIds]=useState([])
     const [sort,setSort]=useState('date')
     
-
-    // const handleSort=(e)=>{
-    //     if(e==='date'){
-    //         setPostIds(Object.keys(posts)
-    //           .sort((a,b)=>posts[b].timestamp-posts[a].timestamp)
-    //         )
-    //     }
-    //     else if(e==='votescore'){
-    //         setPostIds(Object.keys(posts)
-    //         .sort((a,b)=>posts[b].voteScore-posts[a].voteScore)
-    //         )
-    //     }
-    //     else{
-    //         setPostIds(Object.keys(posts))
-    //     }
-    // }
 
     return (
         <div className='container'>
             <div className='filterContainer'>
                 <DropdownButton id="dropdown-item-button"
                      as={ButtonGroup}
-                     //id="dropdown-menu-align-right"
                     title={`Caterogy ${category?category:'all'}`}
                     >
                     <Dropdown.Item  eventKey='all' > 
@@ -89,7 +69,6 @@ function Dashboard({ posts, categories,dispatch }) {
             <PostEditModal
             show={modalShow}
             onHide={()=>setModalShow(false)}
-            postId={null}
             />
             <Category
             category={category}

@@ -53,8 +53,7 @@ h1{
   list-style-type: none;
 }
 
-a :hover{
-  background-color: rgb(223, 223, 223);
+.voteHover :hover{
   cursor: pointer;
 }
 

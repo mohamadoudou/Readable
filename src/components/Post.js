@@ -11,23 +11,15 @@ import { deletePostData, votePostData } from '../actions/post'
 
 function Post({ post, dispatch, index }) {
     const [modalShow, setModalShow] = useState(false)
-    const [isEditPost, setIsEditPost] = useState(true)
-    const [option, setOption] = useState('upVote')
-    // const date=post?new Date( post.timestamp).toISOString():null
-    // const postDate=post?date:null
-    // console.log('date problem in post',typeof postDate)
+
     const handleDelete = () => {
         dispatch(deletePostData(post.id, index))
-        console.log('handle delete called', post.id)
     }
 
     const handleUpVote = () => {
-        console.log('upVote clicked')
-        setOption('upVote')
         dispatch(votePostData(index, { option: 'upVote' }, post))
     }
     const handleDownVote = () => {
-        console.log('downVote clicked')
         dispatch(votePostData(index, { option: 'downVote' }, post))
     }
 
@@ -64,23 +56,23 @@ function Post({ post, dispatch, index }) {
                         </Link>
 
                         <div style={{ marginTop: 10 }}>
-                            <a>
-                                <BiUpvote style={{ color: 'green', marginBottom: -10, fontSize:23 }} onClick={handleUpVote}></BiUpvote>
-                            </a>
+                            <span className='voteHover'>
+                                <BiUpvote style={{ color: 'green', marginBottom: -10, fontSize: 23 }} onClick={handleUpVote}></BiUpvote>
+                            </span>
                             <div>{post ? post.voteScore : null}
                                 <span style={{ marginLeft: 5, fontSize: 15 }}>Votes</span>
                             </div>
-                            <a>
-                                <BiDownvote style={{ color: 'red', marginTop: -15, fontSize:23 }} onClick={handleDownVote}></BiDownvote>
-                            </a>
+                            <span className='voteHover'>
+                            <BiDownvote style={{ color: 'red', marginTop: -15, fontSize: 23 }}  onClick={handleDownVote}></BiDownvote>
+                            </span>
                         </div>
 
                         <footer className="blockquote-footer" style={{ marginTop: 5 }} >
                             {post ? null : null}
                             <Link to={`/${post.category}/${post.id}`} className='link'>
-                            <p>{post ? post.commentCount : null} Comments</p>
+                                <p>{post ? post.commentCount : null} Comments</p>
                             </Link>
-                        </footer>   
+                        </footer>
 
                     </Card.Body>
 
@@ -90,7 +82,6 @@ function Post({ post, dispatch, index }) {
                     show={modalShow}
                     onHide={() => setModalShow(false)}
                     post={post ? post : null}
-                    isEditPost={isEditPost}
                     index={index}
                 />
             </>
@@ -104,7 +95,6 @@ function Post({ post, dispatch, index }) {
 
 function mapStateToProps({ posts }, { postId }) {
     const post = posts ? posts[postId] : null
-    console.log('Post in post ', post)
     return {
         index: postId,
         post

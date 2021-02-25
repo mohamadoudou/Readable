@@ -24,11 +24,9 @@ function PostEditModal(props) {
         e.preventDefault()
         const {title,body,author,category}=values
         if(post){
-            console.log('post to be updated',{...post,body})
             dispatch(editPostData({...post,body},index))
         }
         else{
-            console.log('new post to be add')
             dispatch(addPostData(title,body,author,category))
         }
   
@@ -47,7 +45,6 @@ function PostEditModal(props) {
             aria-labelledby='contained-modal-title-vcenter'
             centered
         >
-            {JSON.stringify(values)}
             <Modal.Header closeButton>
                 <Modal.Title id='contained-modal-title-vcenter'>
                     {post&&post.id ? 'Edit Post' : 'Add Post '}

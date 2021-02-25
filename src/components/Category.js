@@ -12,7 +12,7 @@ function Category({dispatch,category,postIds}){
         }else{
             dispatch(receivePostData())
         }
-    },[category])
+    },[category,dispatch])
 
     return (
         <ul className='liDecoration'>
@@ -37,7 +37,6 @@ function mapStateToProps({posts},{sort}) {
        postIds=Object.keys(posts)
       .sort((a,b)=>posts[b].timestamp - posts[a].timestamp)
     }
-    console.log('all posts inside category', posts)
     return {
         postIds,
     }
