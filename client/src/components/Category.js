@@ -1,4 +1,5 @@
 import React, { useEffect} from 'react'
+import ReactLoading from 'react-loading'
 import { connect } from 'react-redux'
 import Post from './Post'
 import '../App.css'
@@ -13,7 +14,8 @@ function Category({dispatch,category,postIds}){
             dispatch(receivePostData())
         }
     },[category,dispatch])
-
+    
+    if(postIds.length!=0){
     return (
         <ul className='liDecoration'>
         {postIds.map((postId) => {
@@ -25,6 +27,9 @@ function Category({dispatch,category,postIds}){
         })}
     </ul>
     )
+    }else{
+       return( <ReactLoading/>)
+    }
 }
 
 

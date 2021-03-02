@@ -52,7 +52,7 @@ function Post({ post, dispatch, index }) {
                         </div>
 
                         <Link to={`/${post.category}/${post.id}`} className='link'>
-                            {post ? post.body : null}
+                            <p className='post_paragraph'>{post ? post.body : null}</p>
                         </Link>
 
                         <div style={{ marginTop: 10 }}>

@@ -73,8 +73,8 @@ export function receivePostData(){
 export function addPostData(title,body,author,category){
     return (dispatch)=>{
         addNewPostAPI(postFormat(title,body,author,category))
-        .then((post)=>{dispatch(addPost(post))
-        })
+        .then((post)=>{dispatch(addPost(post))})
+        .catch(()=>{alert('sorry something when wrong Try again')})
     }
 }
 
@@ -98,8 +98,8 @@ export function votePostData(index,option,post){
 export function deletePostData(postId,index){
     return (dispatch)=>{
         deletePostAPI(postId)
-        .then((post)=>{ dispatch(deletePost(post,index))
-        })
+        .then((post)=>{ dispatch(deletePost(post,index))})
+        .catch(()=>{ alert('sorry something when wrong Try again')})
     }
 }
 

@@ -1,6 +1,6 @@
 
 const PORT=process.env.PORT || 5000
-const api=`https://anonymousreadable.herokuapp.com:${PORT}`
+const api=`https://anonymousreadable.herokuapp.com`
 
 let token =localStorage.token
 
